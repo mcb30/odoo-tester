@@ -1,7 +1,55 @@
 #!/bin/sh
 
+# Fail on any error
+#
 set -e
 
+# Construct Odoo invocation command
+#
+command="/opt/odoo/odoo-bin --database odoo --stop-after-init"
+
+# Extend Odoo command to get coverage tests for any (non-core) addons
+#
+addonsdir=/opt/odoo-addons
+addonspath=/opt/odoo/odoo/addons,/opt/odoo/addons
+addons=$(find ${addonsdir} -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
+if [ -n "${addons}" ] ; then
+    for addon in ${addons} ; do
+	if [ -n "${includes}" ] ; then
+	    includes="${includes},"
+	fi
+	includes="${includes}*addons/${addon}/*"
+    done
+    command="coverage3 run --include=\"${includes}\" --omit=\"*/tests/*\" \
+             ${command}"
+    addonspath="${addonspath},${addonsdir}"
+fi
+command="${command} --addons-path ${addonspath}"
+
+# Append any script arguments to the Odoo command
+#
+if [ -n "$*" ] ; then
+    command="${command} $*"
+fi
+
+# Echo invocation commands for debugging
+#
+set -x
+
+# Start database
+#
 su postgres -c "pg_ctl start"
-su odoo -c "odoo-bin -d odoo --stop-after-init $*"
+
+# Run Odoo
+#
+su odoo -l -c "${command}"
+
+# Stop database
+#
 su postgres -c "pg_ctl stop"
+
+# Generate coverage report, if applicable
+#
+if [ -n "${addons}" ] ; then
+    su odoo -l -c "coverage3 report"
+fi

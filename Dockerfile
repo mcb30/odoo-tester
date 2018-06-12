@@ -12,7 +12,8 @@ RUN dnf install -y python3-PyPDF2 python3-passlib python3-babel \
 		   python3-pillow python3-psutil python3-requests \
 		   python3-jinja2 python3-reportlab python3-html2text \
 		   python3-docutils python3-num2words python3-phonenumbers \
-		   wkhtmltopdf postgresql-server unzip ; \
+		   python3-coverage wkhtmltopdf postgresql-server findutils \
+		   unzip ; \
     dnf clean all
 
 # PostgreSQL initialisation
@@ -33,6 +34,8 @@ RUN pg_ctl start ; \
 
 # Odoo wrapper script
 #
+USER root
+RUN mkdir /opt/odoo-addons
 COPY odoo-wrapper /usr/local/bin/odoo-wrapper
 
 # Upstream Odoo snapshot
@@ -40,8 +43,7 @@ COPY odoo-wrapper /usr/local/bin/odoo-wrapper
 ADD https://codeload.github.com/odoo/odoo/zip/${ODOO_VERSION} /opt/odoo.zip
 USER root
 RUN unzip -d /opt /opt/odoo.zip ; \
-    ln -s odoo-${ODOO_VERSION} /opt/odoo ; \
-    ln -s /opt/odoo/odoo-bin /usr/local/bin/odoo-bin
+    ln -s odoo-${ODOO_VERSION} /opt/odoo
 
 # Create base Odoo database
 #
