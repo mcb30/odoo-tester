@@ -21,7 +21,7 @@ if [ -n "${addons}" ] ; then
 	includes="${includes}*addons/${addon}/*"
     done
     command="coverage3 run --include=\"${includes}\" --omit=\"*/tests/*\" \
-             ${command}"
+             --branch ${command}"
     addonspath="${addonspath},${addonsdir}"
 fi
 command="${command} --addons-path ${addonspath}"
