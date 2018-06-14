@@ -51,5 +51,5 @@ su postgres -c "pg_ctl stop"
 # Generate coverage report, if applicable
 #
 if [ -n "${addons}" ] ; then
-    su odoo -l -c "coverage3 report"
+    su odoo -l -c "coverage3 report --show-missing"
 fi
