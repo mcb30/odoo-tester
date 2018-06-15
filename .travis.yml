@@ -8,3 +8,10 @@ before_install:
 
 script:
   - docker run -i -t --rm ${TRAVIS_REPO_SLUG}
+
+before_deploy:
+  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
+
+deploy:
+  - provider: script
+    script: docker push ${TRAVIS_REPO_SLUG}
