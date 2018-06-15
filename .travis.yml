@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t odoo-tester .
+  - docker build -t ${TRAVIS_REPO_SLUG} .
 
 script:
-  - docker run -i -t --rm odoo-tester
+  - docker run -i -t --rm ${TRAVIS_REPO_SLUG}
