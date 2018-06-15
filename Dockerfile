@@ -42,7 +42,7 @@ COPY odoo-wrapper /usr/local/bin/odoo-wrapper
 #
 ADD https://codeload.github.com/odoo/odoo/zip/${ODOO_VERSION} /opt/odoo.zip
 USER root
-RUN unzip -d /opt /opt/odoo.zip ; \
+RUN unzip -q -d /opt /opt/odoo.zip ; \
     ln -s odoo-${ODOO_VERSION} /opt/odoo
 
 # Create base Odoo database
