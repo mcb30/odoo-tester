@@ -1,5 +1,7 @@
 # Odoo automated unit test runner
 
+[![Build Status](https://travis-ci.org/unipartdigital/odoo-tester.svg?branch=master)](https://travis-ci.org/unipartdigital/odoo-tester)
+
 This is a recipe for building a [Docker](https://www.docker.com/)
 container suitable for running automated unit tests on
 [Odoo](https://github.com/odoo/odoo) modules.  The container is built
