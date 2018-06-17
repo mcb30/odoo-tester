@@ -12,7 +12,7 @@ RUN dnf install -y python3-PyPDF2 python3-passlib python3-babel \
 		   python3-pillow python3-psutil python3-requests \
 		   python3-jinja2 python3-reportlab python3-html2text \
 		   python3-docutils python3-num2words python3-phonenumbers \
-		   python3-coverage wkhtmltopdf nodejs-less \
+		   python3-coverage python3-coveralls wkhtmltopdf nodejs-less \
 		   postgresql-server findutils unzip ; \
     dnf clean all
 
