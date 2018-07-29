@@ -6,7 +6,7 @@ This is a recipe for building a [Docker](https://www.docker.com/)
 container suitable for running automated unit tests on
 [Odoo](https://github.com/odoo/odoo) modules.  The container is built
 using [Fedora](https://getfedora.org/) and the latest Odoo branch.
-All dependencies are provided using official Fedora packages.
+Almost all dependencies are provided using official Fedora packages.
 
 The resulting container is published on Docker Hub as
 [`unipartdigital/odoo-tester`](https://hub.docker.com/r/unipartdigital/odoo-tester/).
