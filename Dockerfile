@@ -25,8 +25,20 @@ RUN dnf install -y python3-PyPDF2 python3-passlib python3-babel \
 		   python3-docutils python3-num2words python3-phonenumbers \
 		   python3-coverage python3-coveralls python3-magic \
 		   wkhtmltopdf nodejs-less postgresql-server \
-		   findutils unzip libpng15 compat-openssl10 ${H2P_URI} ; \
+		   findutils unzip libpng15 compat-openssl10 ${H2P_URI} \
+		   texlive-times texlive-courier ; \
     dnf clean all
+
+# Odoo's barcode generation uses reportlab, which tends to misdetect
+# its platform and assume that it is running on Windows.  Add symlinks
+# using the Windows font file names so that reportlab will find its
+# required fonts anyway.
+#
+RUN mkdir -p /usr/share/fonts/default/Type1 ; \
+    ln -s /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb \
+	  /usr/share/fonts/default/Type1/_er_____.pfb ; \
+    ln -s /usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb \
+	  /usr/share/fonts/default/Type1/com_____.pfb
 
 # PostgreSQL initialisation
 #
