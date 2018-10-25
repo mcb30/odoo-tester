@@ -47,6 +47,11 @@ ENV PGDATA /var/lib/pgsql/data
 USER postgres
 RUN initdb --auth trust --encoding utf8
 
+# PostgreSQL tuning
+#
+COPY postgresql.conf.nosync ${PGDATA}/postgresql.conf.nosync
+RUN cat ${PGDATA}/postgresql.conf.nosync >> ${PGDATA}/postgresql.conf
+
 # Odoo user and database
 #
 USER root
