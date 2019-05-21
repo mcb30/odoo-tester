@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:29
 
 # Odoo version
 #
