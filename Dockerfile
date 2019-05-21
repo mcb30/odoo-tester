@@ -19,7 +19,7 @@ USER root
 RUN dnf update -y ; dnf clean all
 RUN dnf install -y python3-PyPDF2 python3-passlib python3-babel \
 		   python3-werkzeug python3-lxml python3-decorator \
-		   python3-dateutil python3-yaml python3-psycopg2 \
+		   python3-dateutil 'python3-yaml < 5' python3-psycopg2 \
 		   python3-pillow python3-psutil python3-requests \
 		   python3-jinja2 python3-reportlab python3-html2text \
 		   python3-docutils python3-num2words python3-phonenumbers \
