@@ -24,7 +24,7 @@ RUN dnf install -y python3-PyPDF2 python3-passlib python3-babel \
 		   python3-jinja2 python3-reportlab python3-html2text \
 		   python3-docutils python3-num2words python3-phonenumbers \
 		   python3-vatnumber python3-xlrd python3-xlwt \
-		   python3-coverage python3-coveralls python3-magic \
+		   python3-coverage python3-coveralls python3-magic python3-diff-cover \
 		   wkhtmltopdf nodejs-less postgresql-server \
 		   findutils unzip libpng15 compat-openssl10 ${H2P_URI} \
 		   texlive-times texlive-courier ; \
@@ -66,6 +66,8 @@ RUN pg_ctl start ; \
 #
 USER root
 RUN mkdir /opt/odoo-addons
+RUN mkdir /opt/odoo-addons/addons
+RUN chown -R odoo /opt/odoo-addons/
 COPY odoo-wrapper /usr/local/bin/odoo-wrapper
 
 # Upstream Odoo snapshot

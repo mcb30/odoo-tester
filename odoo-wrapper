@@ -10,7 +10,7 @@ command="/opt/odoo/odoo-bin --database odoo --stop-after-init"
 
 # Extend Odoo command to get coverage tests for any (non-core) addons
 #
-addonsdir=/opt/odoo-addons
+addonsdir=/opt/odoo-addons/addons
 addonspath=/opt/odoo/odoo/addons,/opt/odoo/addons
 addons=$(find ${addonsdir} -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
 if [ -n "${addons}" ] ; then
@@ -42,7 +42,7 @@ su postgres -c "pg_ctl start"
 
 # Run Odoo
 #
-su odoo -l -c "${command}"
+su odoo -l -c "cd /opt/odoo-addons/; ${command}"
 
 # Stop database
 #
@@ -51,5 +51,5 @@ su postgres -c "pg_ctl stop"
 # Generate coverage report, if applicable
 #
 if [ -n "${addons}" ] ; then
-    su odoo -l -c "coverage3 report --show-missing"
+    su odoo -l -c "cd /opt/odoo-addons/ && coverage3 report --show-missing && coverage3 xml && diff-cover coverage.xml"
 fi
