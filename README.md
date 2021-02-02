@@ -1,6 +1,7 @@
 # Odoo automated unit test runner
 
-[![Build Status](https://travis-ci.com/mcb30/odoo-tester.svg?branch=master)](https://travis-ci.com/mcb30/odoo-tester)
+[![Build](https://img.shields.io/github/workflow/status/mcb30/odoo-tester/Build)](https://github.com/mcb30/odoo-tester/actions?query=workflow%3ABuild+branch%3Amaster)
+[![Image](https://img.shields.io/docker/image-size/mcb30/odoo-tester)](https://hub.docker.com/r/mcb30/odoo-tester/)
 
 This is a recipe for building a [Docker](https://www.docker.com/)
 container suitable for running automated unit tests on
@@ -46,6 +47,6 @@ using:
     docker run -it --rm my_module-tester
 
 These commands can be invoked as part of a continuous integration
-system such as [Travis CI](https://travis-ci.com/), to ensure that the
-module's automated tests are run automatically for every commit and
-pull request.
+system such as [GitHub Actions](https://docs.github.com/actions), to
+ensure that the module's automated tests are run automatically for
+every commit and pull request.
